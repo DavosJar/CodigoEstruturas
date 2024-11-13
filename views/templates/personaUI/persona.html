@@ -1,0 +1,38 @@
+{% extends "/layout.html" %}
+{% block title %}Personas{% endblock title %}
+{% block content %}
+    <div class="container">
+        <div class="d-flex justify-content-between mb-3">
+            <h2>Lista de Personas</h2>
+            <a href="{{ url_for('router.save_persona') }}" class="btn btn-primary btn-sm align-self-center">Registrar Persona</a>
+        </div>
+        <table class="table table-striped table-bordered table-hover table-sm">
+            <thead class="thead-dark">
+                <tr>
+                    <th>id</th>
+                    <th>Apellido</th>
+                    <th>Nombre</th>
+                    <th>Dni</th>
+                    <th>Fecha de Nacimiento</th>
+                    <th>Direccion</th>
+                    <th>Rol</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in lista %}
+                <tr>
+                    <td>
+                        <a href="{{ url_for('router.get_persona', id=item.id) }}">{{ item.id }}</a>
+                    </td>
+                    <td>{{ item.apellido }}</td>
+                    <td>{{ item.nombre }}</td>
+                    <td>{{ item.dni }}</td>
+                    <td>{{ item.fechaNacimiento }}</td>
+                    <td>{{ item.direccion }}</td>
+                    <td>{{ item.rolId }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock content %}

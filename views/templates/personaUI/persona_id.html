@@ -1,0 +1,23 @@
+{% extends "/layout.html" %}
+{% block title %}{{data.apellido}}{% endblock title %}
+{% block content %}
+<div class="container">
+    <div class="d-flex justify-content-between mb-3">
+        <h2>{{ data.apellido }}</h2>
+        <a href="{{ url_for('router.save_persona') }}" class="btn btn-primary btn-sm align-self-center">Registrar Persona</a>
+        <form action={{ url_for('router.del_persona', id=data.id) }} method="post">
+            <button type="submit">Eliminar Persona</button>
+        </form>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">{{ data.nombre }} {{ data.apellido }}</h5>
+            <p class="card-text"><strong>DNI:</strong> {{ data.dni }}</p>
+            <p class="card-text"><strong>Fecha de Nacimiento:</strong> {{ data.fechaNacimiento }}</p>
+            <p class="card-text"><strong>Dirección:</strong> {{ data.direccion }}</p>
+            <p class="card-text"><strong>Rol:</strong> {{ data.rolId }}</p>
+        </div>
+    </div>
+</div>
+{% endblock content %}
