@@ -48,4 +48,8 @@ public class PersonaServices {
         return obj.delete();
     }
 
+    public Boolean updatePersona() throws Exception {
+        return obj.update();
+    }
+
 }
