@@ -52,4 +52,8 @@ public class PersonaServices {
         return obj.update();
     }
 
+    public LinkedList<Persona> order() throws Exception {
+        return obj.orderList();
+    }
+
 }

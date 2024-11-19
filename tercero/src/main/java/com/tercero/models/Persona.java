@@ -14,6 +14,10 @@ public class Persona {
     public Persona() {
     }
 
+    public Persona(String dni) {
+        this.dni = dni;
+    }
+
     public Persona(String nombre, String apellido, String dni, String fechaNacimiento, String direccion) {
         this.nombre = nombre;
         this.apellido = apellido;
@@ -80,7 +84,7 @@ public class Persona {
 
     @Override
     public String toString() {
-        return "Apellido: " + this.apellido;
+        return "[ " + this.id + " - " + this.dni + " ]";
 
     }
 

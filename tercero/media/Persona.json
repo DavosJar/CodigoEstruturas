@@ -1,1 +1,182 @@
-[{"id":1,"nombre":"Alexis","apellido":"Jara","dni":"12345678","fechaNacimiento":"1990-01-01","direccion":"CalleFalsa123","rolId":2},{"id":2,"nombre":"Juan","apellido":"Pérez","dni":"12345678","fechaNacimiento":"1990-01-01","direccion":"CalleFalsa123"},{"id":3,"nombre":"Juan","apellido":"Pérez","dni":"12345678","fechaNacimiento":"1990-01-01","direccion":"CalleFalsa123"},{"id":4,"nombre":"Juan","apellido":"Pérez","dni":"12345678","fechaNacimiento":"1990-01-01","direccion":"CalleFalsa123"},{"id":5,"nombre":"Juan","apellido":"Pérez","dni":"12345678","fechaNacimiento":"1990-01-01","direccion":"CalleFalsa123"},{"id":6,"nombre":"Juan","apellido":"Pérez","dni":"12345678","fechaNacimiento":"1990-01-01","direccion":"CalleFalsa123"},{"id":7,"nombre":"Juan","apellido":"Pérez","dni":"12345678","fechaNacimiento":"1990-01-01","direccion":"CalleFalsa123"},{"id":8,"nombre":"Juan","apellido":"Pérez","dni":"12345678","fechaNacimiento":"1990-01-01","direccion":"CalleFalsa123"},{"id":9,"nombre":"Juan","apellido":"Pérez","dni":"12345678","fechaNacimiento":"1990-01-01","direccion":"CalleFalsa123"}]
+[
+    {
+        "id": 1,
+        "dni": "12345678",
+        "nombre": null,
+        "apellido": null,
+        "fechaNacimiento": null,
+        "direccion": null,
+        "rolId": null
+    },
+    {
+        "id": 2,
+        "dni": "23456789",
+        "nombre": null,
+        "apellido": null,
+        "fechaNacimiento": null,
+        "direccion": null,
+        "rolId": null
+    },
+    {
+        "id": 3,
+        "dni": "34567890",
+        "nombre": null,
+        "apellido": null,
+        "fechaNacimiento": null,
+        "direccion": null,
+        "rolId": null
+    },
+    {
+        "id": 4,
+        "dni": "45678901",
+        "nombre": null,
+        "apellido": null,
+        "fechaNacimiento": null,
+        "direccion": null,
+        "rolId": null
+    },
+    {
+        "id": 5,
+        "dni": "56789012",
+        "nombre": null,
+        "apellido": null,
+        "fechaNacimiento": null,
+        "direccion": null,
+        "rolId": null
+    },
+    {
+        "id": 6,
+        "dni": "67890123",
+        "nombre": null,
+        "apellido": null,
+        "fechaNacimiento": null,
+        "direccion": null,
+        "rolId": null
+    },
+    {
+        "id": 7,
+        "dni": "78901234",
+        "nombre": null,
+        "apellido": null,
+        "fechaNacimiento": null,
+        "direccion": null,
+        "rolId": null
+    },
+    {
+        "id": 8,
+        "dni": "89012345",
+        "nombre": null,
+        "apellido": null,
+        "fechaNacimiento": null,
+        "direccion": null,
+        "rolId": null
+    },
+    {
+        "id": 9,
+        "dni": "90123456",
+        "nombre": null,
+        "apellido": null,
+        "fechaNacimiento": null,
+        "direccion": null,
+        "rolId": null
+    },
+    {
+        "id": 10,
+        "dni": "01234567",
+        "nombre": null,
+        "apellido": null,
+        "fechaNacimiento": null,
+        "direccion": null,
+        "rolId": null
+    },
+    {
+        "id": 11,
+        "dni": "12378901",
+        "nombre": null,
+        "apellido": null,
+        "fechaNacimiento": null,
+        "direccion": null,
+        "rolId": null
+    },
+    {
+        "id": 12,
+        "dni": "23489012",
+        "nombre": null,
+        "apellido": null,
+        "fechaNacimiento": null,
+        "direccion": null,
+        "rolId": null
+    },
+    {
+        "id": 13,
+        "dni": "34590123",
+        "nombre": null,
+        "apellido": null,
+        "fechaNacimiento": null,
+        "direccion": null,
+        "rolId": null
+    },
+    {
+        "id": 14,
+        "dni": "45601234",
+        "nombre": null,
+        "apellido": null,
+        "fechaNacimiento": null,
+        "direccion": null,
+        "rolId": null
+    },
+    {
+        "id": 15,
+        "dni": "56712345",
+        "nombre": null,
+        "apellido": null,
+        "fechaNacimiento": null,
+        "direccion": null,
+        "rolId": null
+    },
+    {
+        "id": 16,
+        "dni": "67823456",
+        "nombre": null,
+        "apellido": null,
+        "fechaNacimiento": null,
+        "direccion": null,
+        "rolId": null
+    },
+    {
+        "id": 17,
+        "dni": "78934567",
+        "nombre": null,
+        "apellido": null,
+        "fechaNacimiento": null,
+        "direccion": null,
+        "rolId": null
+    },
+    {
+        "id": 18,
+        "dni": "89045678",
+        "nombre": null,
+        "apellido": null,
+        "fechaNacimiento": null,
+        "direccion": null,
+        "rolId": null
+    },
+    {
+        "id": 19,
+        "dni": "90156789",
+        "nombre": null,
+        "apellido": null,
+        "fechaNacimiento": null,
+        "direccion": null,
+        "rolId": null
+    },
+    {
+        "id": 20,
+        "dni": "01267890",
+        "nombre": null,
+        "apellido": null,
+        "fechaNacimiento": null,
+        "direccion": null,
+        "rolId": null
+    }
+]
