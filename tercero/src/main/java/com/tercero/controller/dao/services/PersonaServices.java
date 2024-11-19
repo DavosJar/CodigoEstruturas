@@ -48,4 +48,12 @@ public class PersonaServices {
         return obj.delete();
     }
 
+    public Boolean updatePersona() throws Exception {
+        return obj.update();
+    }
+
+    public LinkedList<Persona> order() throws Exception {
+        return obj.orderList();
+    }
+
 }

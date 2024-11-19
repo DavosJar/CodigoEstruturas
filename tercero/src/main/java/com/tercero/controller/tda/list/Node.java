@@ -2,7 +2,7 @@ package com.tercero.controller.tda.list;
 
 //datos genéricos T E, K , V
 //E significa que es un valor  genérico que se va a utilizar en la lista
-public class Node <E>{
+public class Node<E> {
     private E data;
     private Node<E> next;
 

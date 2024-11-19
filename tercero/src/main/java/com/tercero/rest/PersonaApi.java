@@ -3,6 +3,7 @@ package com.tercero.rest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -13,10 +14,8 @@ import javax.ws.rs.core.Response;
 import java.util.HashMap;
 import javax.ws.rs.core.Response.Status;
 
-import com.google.gson.Gson;
 import com.tercero.controller.dao.services.PersonaServices;
 import com.tercero.controller.excepcion.ListEmptyException;
-import com.tercero.models.Persona;
 
 @Path("/persona")
 @SuppressWarnings({ "unchecked", "rawtypes" })
@@ -100,6 +99,33 @@ public class PersonaApi {
             res.put("estado", "error");
             res.put("data", "Error interno del servidor: " + e.getMessage());
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(res).build();
+        }
+    }
+
+    @PUT
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/update/{id}")
+    public Response update(@PathParam("id") Integer id, HashMap map) throws Exception {
+        HashMap res = new HashMap<>();
+        PersonaServices ps = new PersonaServices();
+        try {
+            ps.getPersona().setId(id);
+            ps.getPersona().setApellido(map.get("apellido").toString());
+            ps.getPersona().setNombre(map.get("nombre").toString());
+            ps.getPersona().setDni(map.get("dni").toString());
+            ps.getPersona().setFechaNacimiento(map.get("fechaNacimiento").toString());
+            ps.getPersona().setDireccion(map.get("direccion").toString());
+            ps.getPersona().setRolId(Integer.valueOf(map.get("rolId").toString()));
+
+            ps.updatePersona();
+            res.put("msg", "OK");
+            res.put("data", ps.toJson() + " Actualizado con exito");
+            return Response.ok(res).build();
+        } catch (Exception e) {
+            e.printStackTrace();
+            res.put("msg", "ERROR");
+            res.put("error", "Ocurrio un error inesperado: " + e.toString());
+            return Response.status(Status.INTERNAL_SERVER_ERROR).entity(res).build();
         }
     }
 

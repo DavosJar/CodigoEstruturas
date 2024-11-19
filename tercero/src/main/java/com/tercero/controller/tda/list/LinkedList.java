@@ -2,6 +2,7 @@ package com.tercero.controller.tda.list;
 
 import com.tercero.controller.excepcion.ListEmptyException;
 
+@SuppressWarnings({ "unchecked", "rawtypes" })
 public class LinkedList<E> {
 
     private Node<E> head;
@@ -257,6 +258,56 @@ public class LinkedList<E> {
         return this;
     }
 
+    public LinkedList<E> mergeOrder() throws Exception {
+        if (this.size > 1) {
+            E[] lista = this.toArray();
+            lista = mergeSort(lista);
+            return this.toList(lista);
+        }
+        return this;
+    }
+
+    private E[] mergeSort(E[] lista) throws Exception {
+        if (lista.length <= 1) {
+            return lista;
+        }
+        int mid = lista.length / 2;
+        E[] izquierda = (E[]) new Object[mid];
+        E[] derecha = (E[]) new Object[lista.length - mid];
+
+        System.arraycopy(lista, 0, izquierda, 0, mid);
+        System.arraycopy(lista, mid, derecha, 0, lista.length - mid);
+
+        izquierda = mergeSort(izquierda);
+        derecha = mergeSort(derecha);
+        return merge(izquierda, derecha);
+    }
+
+    private E[] merge(E[] izquierda, E[] derecha) throws Exception {
+        E[] resultado = (E[]) new Object[izquierda.length + derecha.length];
+        Integer indexIzquierda = 0;
+        Integer indexDerecha = 0;
+        Integer indexResultante = 0;
+
+        while (indexIzquierda < izquierda.length && indexDerecha < derecha.length) {
+            if (compare(izquierda[indexIzquierda], derecha[indexDerecha])) {
+                resultado[indexResultante++] = izquierda[indexIzquierda++];
+            } else {
+                resultado[indexResultante++] = derecha[indexDerecha++];
+            }
+        }
+
+        while (indexIzquierda < izquierda.length) {
+            resultado[indexResultante++] = izquierda[indexIzquierda++];
+        }
+
+        while (indexDerecha < derecha.length) {
+            resultado[indexResultante++] = derecha[indexDerecha++];
+        }
+
+        return resultado;
+    }
+
     private Boolean compare(E a, E b) {
         if (a instanceof Number) {
             Number a1 = (Number) a;
@@ -267,11 +318,10 @@ public class LinkedList<E> {
         }
     }
 
-    @SuppressWarnings("unchecked")
     public E[] toArray() {
         E[] matrix = null;
         if (!isEmpty()) {
-            @SuppressWarnings("rawtypes")
+
             Class clazz = head.getData().getClass();
             matrix = (E[]) java.lang.reflect.Array.newInstance(clazz, size);
             Node<E> aux = head;

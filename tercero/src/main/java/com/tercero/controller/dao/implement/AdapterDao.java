@@ -13,10 +13,9 @@ public class AdapterDao<T> implements InterfazDao<T> {
 
     private Class<T> clazz;
     private Gson g;
-    //Ruta de los archivos
+    // Ruta de los archivos
     public static String URL = "media/";
 
-    
     public AdapterDao(Class clazz) {
         this.clazz = clazz;
         this.g = new Gson();
@@ -25,7 +24,7 @@ public class AdapterDao<T> implements InterfazDao<T> {
     public void persist(T object) throws Exception {
         LinkedList<T> list = listAll();
         list.add(object);
-        String info = g.toJson(list.toArray()); 
+        String info = g.toJson(list.toArray());
         saveFile(info);
     }
 
@@ -44,7 +43,6 @@ public class AdapterDao<T> implements InterfazDao<T> {
         saveFile(data);
     }
 
-    
     public LinkedList listAll() {
         LinkedList list = new LinkedList<>();
         try {
@@ -58,14 +56,12 @@ public class AdapterDao<T> implements InterfazDao<T> {
         return list;
     }
 
-    @Override
     public T get(Integer index) throws Exception {
         LinkedList<T> list = listAll();
-        T[] temp = (T[]) list.toArray();
-        return temp[index - 1];
+        T[] lista = list.toArray();
+        return lista[index];
     }
 
-    @Override
     public void delete(Integer index) throws Exception {
         LinkedList<T> list = listAll();
         list.delete(index - 1);
