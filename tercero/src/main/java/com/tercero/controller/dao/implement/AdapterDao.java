@@ -5,6 +5,7 @@ import java.io.FileWriter;
 import java.util.Scanner;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.tercero.controller.tda.list.LinkedList;
 
 //clase AdapterDao
@@ -12,7 +13,8 @@ import com.tercero.controller.tda.list.LinkedList;
 public class AdapterDao<T> implements InterfazDao<T> {
 
     private Class<T> clazz;
-    private Gson g;
+    private Gson g = new GsonBuilder().disableHtmlEscaping().create();
+
     // Ruta de los archivos
     public static String URL = "media/";
 
@@ -72,8 +74,8 @@ public class AdapterDao<T> implements InterfazDao<T> {
     private String readFile() throws Exception {
         Scanner in = new Scanner(new FileReader(URL + clazz.getSimpleName() + ".json"));
         StringBuilder sb = new StringBuilder();
-        while (in.hasNext()) {
-            sb.append(in.next());
+        while (in.hasNextLine()) {
+            sb.append(in.nextLine());
         }
         in.close();
         return sb.toString();

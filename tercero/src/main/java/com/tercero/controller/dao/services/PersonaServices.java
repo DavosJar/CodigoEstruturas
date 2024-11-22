@@ -4,9 +4,8 @@ import com.tercero.controller.dao.PersonaDao;
 import com.tercero.controller.tda.list.LinkedList;
 import com.tercero.models.Persona;
 
-@SuppressWarnings("unchecked")
 public class PersonaServices {
-    private PersonaDao obj;
+    private final PersonaDao obj;
 
     public PersonaServices() {
         obj = new PersonaDao();
@@ -40,10 +39,6 @@ public class PersonaServices {
         return obj.getPersonaJsonByIndex(Index);
     }
 
-    public LinkedList<Persona> order_apellido(Integer type_order) {
-        return obj.order_apellido(type_order);
-    }
-
     public Boolean delPersona() throws Exception {
         return obj.delete();
     }
@@ -52,8 +47,11 @@ public class PersonaServices {
         return obj.update();
     }
 
-    public LinkedList<Persona> order() throws Exception {
-        return obj.orderList();
+    public LinkedList<Persona> orderBy(String attibute, Integer type) throws Exception {
+        return obj.orderBy(attibute, type);
     }
 
+    public LinkedList<Persona> buscarNombre(String texto) throws Exception {
+        return obj.buscar(texto);
+    }
 }

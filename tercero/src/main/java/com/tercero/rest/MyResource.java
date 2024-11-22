@@ -22,49 +22,14 @@ public class MyResource {
     public String getIt() {
         HashMap map = new HashMap<>();
         PersonaServices ps = new PersonaServices();
-        String aux = "";
         Long startTime;
         Long endTime;
         Long duration;
         Boolean existe;
         try {
-            // aux = "la lista esta vacia " + ps.listAll().isEmpty();
-            LinkedList<String> listita = new LinkedList<>();
-            LinkedList<Double> listaA = new LinkedList<>();
-            /*
-             * for (int i = 0; i < 40000; i++) {
-             * listita.add(generarCedula());
-             * }
-             * startTime = System.nanoTime();
-             * listita.mergeOrder();
-             * endTime = System.nanoTime();
-             * duration = endTime - startTime;
-             * System.out.println("Tempo de ordenacion: " + duration + "ns");
-             * 
-             * startTime = System.nanoTime();
-             * existe = buscarBinaria("1104343593", listita);
-             * endTime = System.nanoTime();
-             * duration = endTime - startTime;
-             * System.out.println("Tempo de Busqueda con ordenacion y binaria: " + duration
-             * + "ns");
-             * startTime = System.nanoTime();
-             * existe = busquedaLineal("1104343593", listita);
-             * endTime = System.nanoTime();
-             * duration = endTime - startTime;
-             * System.out.println("Tempo de lineal: " + duration + "ns");
-             * /
-             **/
-            for (int i = 0; i < 150; i++) {
-                double roundNumber = Math.round((Math.random() * 100) * 100.0) / 100.0;
-                listaA.add(roundNumber);
-            }
-            System.out.println(listaA.toString());
-            listaA.mergeOrder();
-            System.out.println(listaA.toString());
 
             System.out.println(ps.listAll().toString());
-            System.out.println(ps.order().toString());
-
+            System.out.println(ps.orderBy("id", 0));
         } catch (Exception e) {
             System.out.println("error" + e);
         }
@@ -84,7 +49,7 @@ public class MyResource {
     }
 
     public Boolean buscarBinaria(String dni, LinkedList<String> listita) throws Exception {
-        LinkedList<String> listaOrdenada = listita.mergeOrder();
+        LinkedList<String> listaOrdenada = listita.order(dni, 1);
         String[] lista = (String[]) listaOrdenada.toArray();
 
         int left = 0;

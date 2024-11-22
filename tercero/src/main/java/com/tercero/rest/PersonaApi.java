@@ -1,21 +1,22 @@
 package com.tercero.rest;
 
+import java.util.HashMap;
+
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
-import javax.ws.rs.DELETE;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-
-import java.util.HashMap;
 import javax.ws.rs.core.Response.Status;
 
 import com.tercero.controller.dao.services.PersonaServices;
 import com.tercero.controller.excepcion.ListEmptyException;
+import com.tercero.controller.tda.list.LinkedList;
 
 @Path("/persona")
 @SuppressWarnings({ "unchecked", "rawtypes" })
@@ -23,7 +24,7 @@ public class PersonaApi {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    @Path("/all")
+    @Path("/list")
     public Response getAllPersons() throws ListEmptyException {
         HashMap res = new HashMap<>();
         PersonaServices ps = new PersonaServices();
@@ -37,6 +38,29 @@ public class PersonaApi {
             res.put("msg", "Errors." + e.getMessage());
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(res).build();
         }
+    }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/list/search/{text}")
+    public Response search(@PathParam("text") String text) throws ListEmptyException {
+        HashMap res = new HashMap<>();
+        PersonaServices ps = new PersonaServices();
+
+        try {
+            res.put("status", "Ok");
+            LinkedList lista = ps.buscarNombre(text);
+            res.put("data", lista.toArray());
+            if (lista.isEmpty()) {
+                res.put("data", new Object[] {});
+            }
+
+        } catch (Exception e) {
+            res.put("status", "ERROR");
+            res.put("msg", "Errors." + e.getMessage());
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(res).build();
+        }
+        return Response.ok(res).build();
     }
 
     @GET
@@ -122,7 +146,6 @@ public class PersonaApi {
             res.put("data", ps.toJson() + " Actualizado con exito");
             return Response.ok(res).build();
         } catch (Exception e) {
-            e.printStackTrace();
             res.put("msg", "ERROR");
             res.put("error", "Ocurrio un error inesperado: " + e.toString());
             return Response.status(Status.INTERNAL_SERVER_ERROR).entity(res).build();

@@ -1,5 +1,7 @@
 package com.tercero.controller.tda.list;
 
+import java.lang.reflect.Method;
+
 import com.tercero.controller.excepcion.ListEmptyException;
 
 @SuppressWarnings({ "unchecked", "rawtypes" })
@@ -238,17 +240,18 @@ public class LinkedList<E> {
         }
     }
 
-    public LinkedList<E> order() throws Exception {
+    public LinkedList<E> order(String attribute, Integer type) throws Exception {
         if (!isEmpty()) {
             E data = this.head.getData();
-            if (data instanceof Number || data instanceof String) {
+            if (data instanceof Object) {
                 E[] lista = this.toArray();
                 reset();
                 for (int i = 1; i < lista.length; i++) {
                     E aux = lista[i];
                     int j = i - 1;
-                    while (j >= 0 && compare(lista[j], aux)) {
+                    while (j >= 0 && attributeCompare(attribute, lista[j], aux, type)) {
                         lista[j + 1] = lista[j--];
+
                     }
                     lista[j + 1] = aux;
                 }
@@ -258,63 +261,54 @@ public class LinkedList<E> {
         return this;
     }
 
-    public LinkedList<E> mergeOrder() throws Exception {
-        if (this.size > 1) {
-            E[] lista = this.toArray();
-            lista = mergeSort(lista);
-            return this.toList(lista);
-        }
-        return this;
+    private Boolean attributeCompare(String attribute, E a, E b, Integer type) throws Exception {
+        return compare(existAttribute(a, attribute), existAttribute(b, attribute), type);
     }
 
-    private E[] mergeSort(E[] lista) throws Exception {
-        if (lista.length <= 1) {
-            return lista;
-        }
-        int mid = lista.length / 2;
-        E[] izquierda = (E[]) new Object[mid];
-        E[] derecha = (E[]) new Object[lista.length - mid];
-
-        System.arraycopy(lista, 0, izquierda, 0, mid);
-        System.arraycopy(lista, mid, derecha, 0, lista.length - mid);
-
-        izquierda = mergeSort(izquierda);
-        derecha = mergeSort(derecha);
-        return merge(izquierda, derecha);
-    }
-
-    private E[] merge(E[] izquierda, E[] derecha) throws Exception {
-        E[] resultado = (E[]) new Object[izquierda.length + derecha.length];
-        Integer indexIzquierda = 0;
-        Integer indexDerecha = 0;
-        Integer indexResultante = 0;
-
-        while (indexIzquierda < izquierda.length && indexDerecha < derecha.length) {
-            if (compare(izquierda[indexIzquierda], derecha[indexDerecha])) {
-                resultado[indexResultante++] = izquierda[indexIzquierda++];
-            } else {
-                resultado[indexResultante++] = derecha[indexDerecha++];
+    private Object existAttribute(E a, String attribute) throws Exception {
+        Method method = null;
+        attribute = attribute.substring(0, 1).toUpperCase() + attribute.substring(1);
+        attribute = "get" + attribute;
+        for (Method m : a.getClass().getMethods()) {
+            if (m.getName().contains(attribute)) {
+                method = m;
+                break;
             }
         }
-
-        while (indexIzquierda < izquierda.length) {
-            resultado[indexResultante++] = izquierda[indexIzquierda++];
+        if (method == null) {
+            for (Method m : a.getClass().getSuperclass().getMethods()) {
+                if (m.getName().contains(attribute)) {
+                    method = m;
+                    break;
+                }
+            }
+        }
+        if (method != null) {
+            return method.invoke(a);
         }
 
-        while (indexDerecha < derecha.length) {
-            resultado[indexResultante++] = derecha[indexDerecha++];
-        }
-
-        return resultado;
+        return null;
     }
 
-    private Boolean compare(E a, E b) {
-        if (a instanceof Number) {
-            Number a1 = (Number) a;
-            Number b1 = (Number) b;
-            return a1.doubleValue() > b1.doubleValue();
-        } else {
-            return (a.toString()).compareTo(b.toString()) > 0;
+    private Boolean compare(Object a, Object b, Integer type) throws Exception {
+        switch (type) {
+            case 0:
+                if (a instanceof Number) {
+                    Number a1 = (Number) a;
+                    Number b1 = (Number) b;
+                    return a1.doubleValue() > b1.doubleValue();
+                } else {
+                    return (a.toString().toLowerCase()).compareTo(b.toString().toLowerCase()) > 0;
+                }
+            default:
+                if (a instanceof Number) {
+                    Number a1 = (Number) a;
+                    Number b1 = (Number) b;
+                    return a1.doubleValue() < b1.doubleValue();
+                } else {
+                    return (a.toString().toLowerCase()).compareTo(b.toString().toLowerCase()) < 0;
+                }
+
         }
     }
 
